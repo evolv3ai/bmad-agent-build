@@ -897,14 +897,66 @@ Confirm with the user their preferred interaction style:
 
 Process all template elements according to `templates#template-format` conventions.
 
-### 5. Validate with Checklist
+### 5. Content Filtering and Presentation Rules
+
+**CRITICAL: The following template markup MUST be filtered out and NEVER shown to users:**
+
+- `[[LLM: ...]]` - Internal instructions for the AI agent
+- `@{example: ...}` and `@{/example}` - Example blocks and their delimiters
+- `^^CONDITION: ...^^` and `^^/CONDITION: ...^^` - Conditional logic markers
+- `<<REPEAT: ...>>` and `<</REPEAT>>` - Template repetition markers
+- `{{variable_name}}` - Template variables (replace with actual content)
+- Any other template markup or processing instructions
+
+**Content Presentation Guidelines:**
+
+- Present only the final, clean content to users
+- Replace template variables with actual project-specific content
+- Show examples only when they add value, without the markup
+- Process all conditional logic internally - show only relevant sections
+- For Canvas mode: Update the document with clean, formatted content only
+
+### 6. Advanced Elicitation Techniques Protocol
+
+When the template indicates to apply `data#advanced-elicitation-techniques`:
+
+**Present ONLY the numbered list (0-9) with this exact format:**
+
+```
+Advanced Reflective, Elicitation & Brainstorming Actions
+Choose an action (0-9 - 9 to bypass):
+
+0. Expand or Contract for Audience
+1. Explain Reasoning (CoT Step-by-Step)
+2. Critique and Refine
+3. Analyze Logical Flow and Dependencies
+4. Assess Alignment with Overall Goals
+5. Identify Potential Risks and Unforeseen Issues
+6. Challenge from Critical Perspective (Self or Other Persona)
+7. Explore Diverse Alternatives (ToT-Inspired)
+8. Hindsight is 20/20: The 'If Only...' Reflection
+9. Proceed / No Further Actions
+```
+
+**Do NOT show:**
+
+- The full protocol text with `[[LLM: ...]]` instructions
+- Detailed explanations of each option
+- Any template markup
+
+**After user selection:**
+
+- Execute the chosen action according to the full protocol instructions
+- Ask if they want to select another action or proceed with option 9
+
+### 7. Validate with Checklist
 
 - Run the `pm-checklist` against completed PRD
 - Document completion status for each checklist item
 - Present summary by section, address any deficiencies
 - Generate final checklist report with findings and resolutions
 
-### 6. Prepare Handoffs
+### 8. Prepare Handoffs
 
 Based on PRD content, prepare appropriate next-step prompts:
 
@@ -919,7 +971,7 @@ Based on PRD content, prepare appropriate next-step prompts:
 - Add Architect prompt in designated template section
 - Recommend proceeding directly to Architect
 
-### 7. Final Presentation
+### 9. Final Presentation
 
 **General Guidelines:**
 
@@ -927,6 +979,7 @@ Based on PRD content, prepare appropriate next-step prompts:
 - DO NOT truncate unchanged information
 - Begin directly with content (no introductory text needed)
 - Ensure all template sections are properly filled
+- **NEVER show template markup, instructions, or processing directives to users**
 
 ## Key Resources
 
@@ -941,6 +994,7 @@ Based on PRD content, prepare appropriate next-step prompts:
 - All detailed instructions are embedded in templates, not this task file
 - Focus on orchestration and workflow, not content specifics
 - Maintain flexibility for different template structures
+- **Template markup is for AI processing only - users should never see internal directives**
 
 ==================== END: create-prd ====================
 
