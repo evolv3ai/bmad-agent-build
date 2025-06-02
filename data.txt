@@ -1,3 +1,44 @@
+==================== START: advanced-elicitation-techniques ====================
+# Advanced Self-Refinement & Elicitation Options
+
+[[LLM: When appropriate for refining content (e.g., after presenting a document section or when the user requests brainstorming help), present the user with the following numbered list (0-9) titled 'Advanced Reflective, Elicitation & Brainstorming Actions'. Explain that these are optional steps to help ensure quality, explore alternatives, and deepen the understanding of the current topic before finalizing it or moving on. The user can select an action by its number. After an action is completed, ask the user if they'd like to select another action from the list or use option 9 to proceed. Ensure the list is presented compactly for easy selection.]]
+
+Advanced Reflective, Elicitation & Brainstorming Actions
+Choose an action (0-9 - 9 to bypass):
+
+0. Expand or Contract for Audience
+   [[LLM: Ask the user whether they want to 'expand' on the content (add more detail, elaborate) or 'contract' it (simplify, clarify, make more concise). Also, ask if there's a specific target audience they have in mind. Once clarified, perform the expansion or contraction from your current role's perspective, tailored to the specified audience if provided.]]
+
+1. Explain Reasoning (CoT Step-by-Step)
+   [[LLM: Explain the step-by-step thinking process, characteristic of your role, that you used to arrive at the current proposal for this content.]]
+
+2. Critique and Refine
+   [[LLM: From your current role's perspective, review your last output or the current section for flaws, inconsistencies, or areas for improvement, and then suggest a refined version reflecting your expertise.]]
+
+3. Analyze Logical Flow and Dependencies
+   [[LLM: From your role's standpoint, examine the content's structure for logical progression, internal consistency, and any relevant dependencies. Confirm if elements are presented in an effective order.]]
+
+4. Assess Alignment with Overall Goals
+   [[LLM: Evaluate how well the current content contributes to the stated overall goals of the document, interpreting this from your specific role's perspective and identifying any misalignments you perceive.]]
+
+5. Identify Potential Risks and Unforeseen Issues
+   [[LLM: Based on your role's expertise, brainstorm potential risks, overlooked edge cases, or unintended consequences related to the current content or proposal.]]
+
+6. Challenge from Critical Perspective (Self or Other Persona)
+   [[LLM: Adopt a critical perspective on the current content. If the user specifies another role or persona (e.g., 'as a customer', 'as [Another Persona Name]'), critique the content or play devil's advocate from that specified viewpoint. If no other role is specified, play devil's advocate from your own current persona's viewpoint, arguing against the proposal or current content and highlighting weaknesses or counterarguments specific to your concerns.]]
+
+7. Explore Diverse Alternatives (ToT-Inspired)
+   [[LLM: From your role's perspective, first broadly brainstorm a range of diverse approaches or solutions to the current topic. Then, from this wider exploration, select and present 2 distinct alternatives, detailing the pros, cons, and potential implications you foresee for each.]]
+
+8. Hindsight is 20/20: The 'If Only...' Reflection
+   [[LLM: In your current persona, imagine it's a retrospective for a project based on the current content. What's the one 'if only we had known/done X...' that your role would humorously or dramatically highlight, along with the imagined consequences?]]
+
+9. Proceed / No Further Actions
+   [[LLM: Acknowledge the user's choice to finalize the current work, accept the AI's last output as is, or move on to the next step without selecting another action from this list. Prepare to proceed accordingly.]]
+
+==================== END: advanced-elicitation-techniques ====================
+
+
 ==================== START: bmad-kb ====================
 # BMAD Knowledge Base
 
@@ -118,7 +159,7 @@ Effective use of the BMAD Method relies on understanding where key tools, config
     - **Setup:** Works without a build step, dynamically loading its configuration.
     - **Configuration (`ide-bmad-orchestrator.cfg.md`):** Contains a `Data Resolution` section (defining base paths for assets like personas, tasks) and `Agent Definitions` (Title, Name, Customize, Persona file, Tasks).
     - **Operation:** Loads its config, lists available personas, and upon user request, embodies the chosen agent by loading its persona file and applying customizations.
-    - The `ide-bmad-orchestrator` file contents can be used as the instructions for a custom agent mode. The agent supports a `/help` command that can help guide the user. The agent relies on the existence in the bmad-agent folder being at the root of the project.
+    - The `ide-bmad-orchestrator` file contents can be used as the instructions for a custom agent mode. The agent supports a `*help` command that can help guide the user. The agent relies on the existence in the bmad-agent folder being at the root of the project.
     - The `ide-bmad-orchestrator` is not recommended for generating stories or doing development. While it CAN become those agents, its HIGHLY recommended to instead use the dedicated dev.ide.md or sm.ide.md as individual dedicated agents. The will use up less context overhead and are going to be used the most frequently.
 - **Standalone IDE Agents:**
   - Optimized for IDE environments (e.g., Windsurf, Cursor), often under 6K characters (e.g., `dev.ide.md`, `sm.ide.md`).
@@ -440,10 +481,16 @@ These tasks allow agents to perform complex, multi-step operations by following 
 ==================== START: technical-preferences ====================
 # User-Defined Preferred Patterns and Preferences
 
-See example files in this folder.
-list out your technical preferences, patterns you like to follow, language framework or starter project preferences. 
+List out your preferred:
+- technical preferences
+- design patterns
+- languages
+- framework
+- etc... 
 
-Anything you learn or prefer over time to drive future project choices, add the here.
+Anything you learn or prefer over time to drive future project choices, add them here.
+
+These will be used by the agents when producing PRD and Architectures
 
 ==================== END: technical-preferences ====================
 
