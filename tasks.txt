@@ -695,7 +695,23 @@ To perform deep research effectively, please be aware:
 ### 1. Identify Template and Context
 
 - Determine which template to use (user-provided or list available for selection to user)
-  - agent-config specific agents will list what docs they have available under this task
+
+  - agent-config specific agents will list what docs they have available under this task, for each item consider it a unique task. So if the user had for example:
+
+    @{example}
+
+  - tasks:
+
+  - [Create Document](tasks#create-doc-from-template):
+
+    - [Prd](templates#prd-tmpl)
+
+    - [Architecture](templates#architecture-tmpl)
+
+    @{/example}
+
+    you would list `Create Document PRD` and `Create Document Architecture` as tasks the agent could perform.
+
 - Gather all relevant inputs, or ask for them, or else rely on user providing necessary details to complete the document
 - Understand the document purpose and target audience
 

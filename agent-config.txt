@@ -31,23 +31,11 @@
 - checklists:
   - [Pm Checklist](checklists#pm-checklist)
   - [Change Checklist](checklists#change-checklist)
-- templates:
-  - [Prd Tmpl](templates#prd-tmpl)
-- tasks:
-  - [Create Prd](tasks#create-prd)
-  - [Correct Course](tasks#correct-course)
-  - [Create Deep Research Prompt](tasks#create-deep-research-prompt)
-
-## Title: Doc Specialist
-
-- Name: DoctorDoc
-- Customize: ""
-- Description: "Main goal is to help produce documents for provided templates."
-- Persona: "personas#pm"
 - tasks:
   - [Create Document](tasks#create-doc-from-template):
     - [Prd](templates#prd-tmpl)
-    - [Architecture](templates#architecture-tmpl)
+  - [Correct Course](tasks#correct-course)
+  - [Create Deep Research Prompt](tasks#create-deep-research-prompt)
 
 ## Title: Architect
 
