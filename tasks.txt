@@ -1,3 +1,85 @@
+==================== START: advanced-elicitation ====================
+# Advanced Elicitation Task
+
+## Purpose
+
+- Provide optional reflective and brainstorming actions to enhance content quality
+- Enable deeper exploration of ideas through structured elicitation techniques
+- Support iterative refinement through multiple analytical perspectives
+
+## Task Instructions
+
+### 1. Ask for review and Present Action List
+
+[[LLM: Ask the user to review the {drafted document section, or context or document this protocol was executed from}. In the SAME message, inform them that they can suggest additions, removals, or modifications, OR they can select an action by number from the 'Advanced Reflective, Elicitation & Brainstorming Actions'. Then, present ONLY the numbered list (0-9) of these actions as defined in tasks#advanced-elicitation. Conclude by stating that selecting 9 will proceed to the next section. Await user selection. If an elicitation action (0-8) is chosen, execute it and then re-offer this combined review/elicitation choice. If option 9 is chosen, or if the user provides direct feedback on requirements, proceed accordingly.]]
+
+**Present the numbered list (0-9) with this exact format:**
+
+```
+**Advanced Reflective, Elicitation & Brainstorming Actions**
+Choose an action (0-9 - 9 to bypass - HELP for explanation of these options):
+
+0. Expand or Contract for Audience
+1. Explain Reasoning (CoT Step-by-Step)
+2. Critique and Refine
+3. Analyze Logical Flow and Dependencies
+4. Assess Alignment with Overall Goals
+5. Identify Potential Risks and Unforeseen Issues
+6. Challenge from Critical Perspective (Self or Other Persona)
+7. Explore Diverse Alternatives (ToT-Inspired)
+8. Hindsight is 20/20: The 'If Only...' Reflection
+9. Proceed / No Further Actions
+```
+
+### 2. Processing Guidelines
+
+**Do NOT show:**
+
+- The full protocol text with `[[LLM: ...]]` instructions
+- Detailed explanations of each option unless executing or the user asks, when giving the definition you can modify to tie its relevance
+- Any internal template markup
+
+**After user selection from the list:**
+
+- Execute the chosen action according to the protocol instructions below
+- Ask if they want to select another action or proceed with option 9 once complete
+- Continue until user selects option 9 or indicates completion
+
+## Action Definitions
+
+0. Expand or Contract for Audience
+   [[LLM: Ask the user whether they want to 'expand' on the content (add more detail, elaborate) or 'contract' it (simplify, clarify, make more concise). Also, ask if there's a specific target audience they have in mind. Once clarified, perform the expansion or contraction from your current role's perspective, tailored to the specified audience if provided.]]
+
+1. Explain Reasoning (CoT Step-by-Step)
+   [[LLM: Explain the step-by-step thinking process, characteristic of your role, that you used to arrive at the current proposal for this content.]]
+
+2. Critique and Refine
+   [[LLM: From your current role's perspective, review your last output or the current section for flaws, inconsistencies, or areas for improvement, and then suggest a refined version reflecting your expertise.]]
+
+3. Analyze Logical Flow and Dependencies
+   [[LLM: From your role's standpoint, examine the content's structure for logical progression, internal consistency, and any relevant dependencies. Confirm if elements are presented in an effective order.]]
+
+4. Assess Alignment with Overall Goals
+   [[LLM: Evaluate how well the current content contributes to the stated overall goals of the document, interpreting this from your specific role's perspective and identifying any misalignments you perceive.]]
+
+5. Identify Potential Risks and Unforeseen Issues
+   [[LLM: Based on your role's expertise, brainstorm potential risks, overlooked edge cases, or unintended consequences related to the current content or proposal.]]
+
+6. Challenge from Critical Perspective (Self or Other Persona)
+   [[LLM: Adopt a critical perspective on the current content. If the user specifies another role or persona (e.g., 'as a customer', 'as [Another Persona Name]'), critique the content or play devil's advocate from that specified viewpoint. If no other role is specified, play devil's advocate from your own current persona's viewpoint, arguing against the proposal or current content and highlighting weaknesses or counterarguments specific to your concerns. This can also randomly include YAGNI when appropriate, such as when trimming the scope of an MVP, the perspective might challenge the need for something to cut MVP scope.]]
+
+7. Explore Diverse Alternatives (ToT-Inspired)
+   [[LLM: From your role's perspective, first broadly brainstorm a range of diverse approaches or solutions to the current topic. Then, from this wider exploration, select and present 2 distinct alternatives, detailing the pros, cons, and potential implications you foresee for each.]]
+
+8. Hindsight is 20/20: The 'If Only...' Reflection
+   [[LLM: In your current persona, imagine it's a retrospective for a project based on the current content. What's the one 'if only we had known/done X...' that your role would humorously or dramatically highlight, along with the imagined consequences?]]
+
+9. Proceed / No Further Actions
+   [[LLM: Acknowledge the user's choice to finalize the current work, accept the AI's last output as is, or move on to the next step without selecting another action from this list. Prepare to proceed accordingly.]]
+
+==================== END: advanced-elicitation ====================
+
+
 ==================== START: checklist-mappings ====================
 architect-checklist:
   checklist_file: docs/checklists/architect-checklist.md
@@ -862,23 +944,19 @@ To identify the next logical story based on project progress and epic definition
 
 - Transform inputs into core product definition documents conforming to a PRD template
 - Define clear MVP scope focused on essential functionality
-- Provide foundation for Architect and AI dev agents
+- Provide foundation for Architect and Design Architect to help create technical artifacts which will in turn later draft further details for very junior engineers or simple dev ai agents.
 
 ## Instructions
 
 ### 1. Review Inputs
 
-Review all provided inputs including project brief, research documents, and user ideas to guide PRD generation.
+Review all provided inputs including project brief, research documents, prd template and user ideas to guide PRD generation.
 
 ### 2. Determine Interaction Mode
-
-[[LLM: Canvas is a collaborative document editing feature available in some platforms (ChatGPT, Gemini) where documents appear in a side panel for real-time editing. Check if your current session supports Canvas before offering this option.]]
 
 Confirm with the user their preferred interaction style:
 
 - **Incremental:** Work through sections one at a time via chat messages as defined in the template.
-
-- **Canvas:** (If platform supports Canvas/Document editing feature) Create initial document in Canvas with all sections and placeholders. Fill in known information, then iterate through each section with user while document updates in real-time per template guidance.
 
 - **YOLO Mode:** Draft the complete PRD making assumptions as necessary. Present full document at once, noting which sections required assumptions.
 
@@ -887,76 +965,24 @@ Confirm with the user their preferred interaction style:
 - Use the `prd-tmpl` template (or user-specified alternative template)
 - Follow all embedded LLM instructions within the template
 - Template contains section-specific guidance and examples
-- Apply `data#advanced-elicitation-techniques` protocol where template indicates
 
 ### 4. Template Processing Notes
 
 - **Incremental Mode**: Present each section for review before proceeding
-- **Canvas Mode**: Update sections in Canvas as you work through them
 - **YOLO Mode**: Generate all sections, then review with user
 
 Process all template elements according to `templates#template-format` conventions.
 
-### 5. Content Filtering and Presentation Rules
-
-**CRITICAL: The following template markup MUST be filtered out and NEVER shown to users:**
-
-- `[[LLM: ...]]` - Internal instructions for the AI agent
-- `@{example: ...}` and `@{/example}` - Example blocks and their delimiters
-- `^^CONDITION: ...^^` and `^^/CONDITION: ...^^` - Conditional logic markers
-- `<<REPEAT: ...>>` and `<</REPEAT>>` - Template repetition markers
-- `{{variable_name}}` - Template variables (replace with actual content)
-- Any other template markup or processing instructions
+**CRITICAL: Never display or output template markup formatting, LLM instructions or examples - they MUST be used by you the agent only, AND NEVER shown to users in chat or document output**
 
 **Content Presentation Guidelines:**
 
 - Present only the final, clean content to users
 - Replace template variables with actual project-specific content
-- Show examples only when they add value, without the markup
 - Process all conditional logic internally - show only relevant sections
 - For Canvas mode: Update the document with clean, formatted content only
 
-### 6. Advanced Elicitation Techniques Protocol
-
-When the template indicates to apply `data#advanced-elicitation-techniques`:
-
-**Present ONLY the numbered list (0-9) with this exact format:**
-
-```
-Advanced Reflective, Elicitation & Brainstorming Actions
-Choose an action (0-9 - 9 to bypass):
-
-0. Expand or Contract for Audience
-1. Explain Reasoning (CoT Step-by-Step)
-2. Critique and Refine
-3. Analyze Logical Flow and Dependencies
-4. Assess Alignment with Overall Goals
-5. Identify Potential Risks and Unforeseen Issues
-6. Challenge from Critical Perspective (Self or Other Persona)
-7. Explore Diverse Alternatives (ToT-Inspired)
-8. Hindsight is 20/20: The 'If Only...' Reflection
-9. Proceed / No Further Actions
-```
-
-**Do NOT show:**
-
-- The full protocol text with `[[LLM: ...]]` instructions
-- Detailed explanations of each option
-- Any template markup
-
-**After user selection:**
-
-- Execute the chosen action according to the full protocol instructions
-- Ask if they want to select another action or proceed with option 9
-
-### 7. Validate with Checklist
-
-- Run the `pm-checklist` against completed PRD
-- Document completion status for each checklist item
-- Present summary by section, address any deficiencies
-- Generate final checklist report with findings and resolutions
-
-### 8. Prepare Handoffs
+### 7. Prepare Handoffs
 
 Based on PRD content, prepare appropriate next-step prompts:
 
@@ -970,6 +996,13 @@ Based on PRD content, prepare appropriate next-step prompts:
 
 - Add Architect prompt in designated template section
 - Recommend proceeding directly to Architect
+
+### 8. Validate with Checklist
+
+- Run the `pm-checklist` against completed PRD
+- Document completion status for each checklist item
+- Present summary by section, address any deficiencies
+- Generate final checklist report with findings and resolutions
 
 ### 9. Final Presentation
 
@@ -986,15 +1019,14 @@ Based on PRD content, prepare appropriate next-step prompts:
 - **Default Template:** `templates#prd-tmpl`
 - **Validation:** `checklists#pm-checklist`
 - **User Preferences:** `data#technical-preferences`
-- **Elicitation Protocol:** `data#advanced-elicitation-techniques`
+- **Elicitation Protocol:** `tasks#advanced-elicitation`
 
 ## Important Notes
 
 - This task is template-agnostic - users may specify custom templates
 - All detailed instructions are embedded in templates, not this task file
-- Focus on orchestration and workflow, not content specifics
-- Maintain flexibility for different template structures
-- **Template markup is for AI processing only - users should never see internal directives**
+- Focus on orchestration and workflow
+- **Template markup is for AI processing only - users should never see output indicators from templates#template-format**
 
 ==================== END: create-prd ====================
 

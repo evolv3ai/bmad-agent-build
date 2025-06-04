@@ -1024,7 +1024,7 @@ _Repeat the above template for each significant component._
 
 ## Requirements
 
-[[LLM: Draft the list of functional and non functional requirements under the two child sections, and then ask the users to review each one.]]
+[[LLM: Draft the list of functional and non functional requirements under the two child sections, and immediately execute tasks#advanced-elicitation display]]
 
 ### Functional
 
@@ -1036,20 +1036,18 @@ _Repeat the above template for each significant component._
 [[LLM: Each Requirement will be a bullet markdown and an identifier sequence starting with NFR`.]]
 @{example: - NFR1: AWS service usage **must** aim to stay within free-tier limits where feasible.}
 
-[[LLM: Follow the `data#advanced-elicitation-techniques` protocol letting the user know he can do it for any section thus far. Do not proceed until user selects option 9.]]
-
 ^^CONDITION: has_ui^^
 
 ## User Interface Design Goals
 
-[[LLM: Capture high-level UI/UX vision to guide Design Architect and inform story creation. Steps:
+[[LLM: Capture high-level UI/UX vision to guide Design Architect and to inform story creation. Steps:
 
 1. Pre-fill all subsections with educated guesses based on project context
 2. Present the complete rendered section to user
 3. Clearly let the user know where assumptions were made
 4. Ask targeted questions for unclear/missing elements or areas needing more specification
 5. This is NOT detailed UI spec - focus on product vision and user goals
-6. After section completion, apply `data#advanced-elicitation-techniques` protocol]]
+6. After section completion, immediately apply `tasks#advanced-elicitation` protocol]]
 
 ### Overall UX Vision
 
@@ -1060,11 +1058,12 @@ _Repeat the above template for each significant component._
 [[LLM: From a product perspective, what are the most critical screens or views necessary to deliver the the PRD values and goals? This is meant to be Conceptual High Level to Drive Rough Epic or User Stories]]
 
 @{example}
+
 - Login Screen
 - Main Dashboard
 - Item Detail Page
 - Settings Page
-@{/example}
+  @{/example}
 
 ### Accessibility: { None, WCAG, etc }
 
@@ -1073,9 +1072,10 @@ _Repeat the above template for each significant component._
 [[LLM: Any known branding elements or style guides that must be incorporated?]]
 
 @{example}
+
 - Replicate the look and feel of early 1900s black and white cinema, including animated effects replicating film damage or projector glitches during page or state transitions.
 - Attached is the full color pallet and tokens for our corporate branding.
-@{/example}
+  @{/example}
 
 ### Target Device and Platforms
 
@@ -1094,7 +1094,7 @@ _Repeat the above template for each significant component._
 3. For unknowns, offer guidance based on project goals and MVP scope
 4. Document ALL technical choices with rationale (why this choice fits the project)
 5. These become constraints for the Architect - be specific and complete
-6. After section completion, apply `data#advanced-elicitation-techniques` protocol.]]
+6. After section completion, apply `tasks#advanced-elicitation` protocol.]]
 
 ### Repository Structure: { Monorepo, Polyrepo, etc...}
 
@@ -1112,7 +1112,7 @@ _Repeat the above template for each significant component._
 
 ## Epics
 
-[[LLM: First, present a high-level list of all epics for user approval, the epic_list. Each epic should have a title and a short (1 sentence) goal statement. This allows the user to review the overall structure before diving into details.
+[[LLM: First, present a high-level list of all epics for user approval, the epic_list and immediately execute tasks#advanced-elicitation display. Each epic should have a title and a short (1 sentence) goal statement. This allows the user to review the overall structure before diving into details.
 
 CRITICAL: Epics MUST be logically sequential following agile best practices:
 
@@ -1138,7 +1138,7 @@ CRITICAL: Epics MUST be logically sequential following agile best practices:
 
 @{/example}
 
-[[LLM: After the epic list is approved, present each `epic_details` with all its stories and acceptance criteria as a complete review unit. Before going to the next epic, apply `data#advanced-elicitation-techniques` protocol.]]
+[[LLM: After the epic list is approved, present each `epic_details` with all its stories and acceptance criteria as a complete review unit and immediately execute tasks#advanced-elicitation display, before moving on to the next epic.]]
 
 <<REPEAT: epic_details>>
 
@@ -1195,7 +1195,7 @@ so that {{benefit}}.
 
 ## Checklist Results Report
 
-[[LLM: This section will be populated if/after running the PM checklist]]
+[[LLM: Before running the checklist and drafting the prompts, offer to output the full updated PRD. If outputting it, confirm with the user proceeding to run the checklist and produce the report. This section will be populated if/after running the PM checklist]]
 
 ----- END Checklist START Design Architect `UI/UX Specification Mode` Prompt ------
 
@@ -1319,6 +1319,16 @@ This Project Brief provides the full context for Mealmate. Please start in 'PRD 
 - @{example: content} = Single line example content for LLM guidance - do not render
 - @{example} ... @{/example} = Multi-line example content for LLM guidance - do not render
 
+## Critical Template Usage Rules
+
+- CRITICAL: Never display or output template markup formatting, LLM instructions or examples
+  - they MUST be used by you the agent only, AND NEVER shown to users in chat or documented output\*\*
+- Present only the final, clean content to users
+- Replace template variables with actual project-specific content
+- Show examples only when they add value, without the markup
+- Process all conditional logic internally - show only relevant sections
+- For Canvas mode: Update the document with clean, formatted content only
+
 @{example}
 
 # My Template Foo
@@ -1328,13 +1338,17 @@ Hello {{users name}}, this is your foo report for {{todays date}}
 
 <<REPEAT: single_foo>>
 [[LLM: For Each Foo, Create a matching creative Bar]]
+
 ## Foo: {{Bar}}
+
 <</REPEAT>>
 
 ^^CONDITION: if_BAZ_exists^^
+
 ## BAZ
 
 ### You haz BAZ! Here is your daily Baz Forecast!
+
 [[LLM: Give the user their daily baz report here]]
 ^^/CONDITION: if_BAZ_exists^^
 
